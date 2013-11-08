@@ -1,0 +1,5 @@
+{% if request.user.is_authenticated %}
+    {% include '_menu_logado.html' %}
+{% else %}
+    {% include '_menu_deslogado.html' %}
+{% endif %}

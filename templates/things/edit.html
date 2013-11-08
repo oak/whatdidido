@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h4>{% trans 'Edit thing' %}</h4>
+    <fieldset>
+        <form action="" method="post" class="form-horizontal">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="control-group{% if field.errors|length > 0 %} error{% endif %}">
+                    <label for="{{ field.if_for_label }}" class="control-label">{% trans field.label %}</label>
+
+                    <div class="controls">
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <span class="help-inline">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" value="{% trans 'Salvar' %}" class="btn primary"/>
+                </div>
+            </div>
+
+
+        </form>
+    </fieldset>
+{% endblock %}

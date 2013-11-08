@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/section/login.css">
+{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            {% if form.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    {% trans 'Login inválido' %}
+                </div>
+            {% endif %}
+
+            <fieldset>
+                <form action="{% url 'login' %}" method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="control-group{% if field.errors|length > 0 %} error{% endif %}">
+                            <label for="{{ field.if_for_label }}" class="control-label">{{ field.label }}</label>
+
+                            <div class="controls">
+                                {{ field }}
+                                {% for error in field.errors %}
+                                    <span class="help-inline">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" value="{% trans 'Send' %}" class="btn primary"/>
+                        </div>
+                    </div>
+
+
+                </form>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}

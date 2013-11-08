@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="nav-collapse collapse">
+    <ul class="nav">
+    </ul>
+    <ul class="nav pull-right">
+        <li><a href="#">{{ request.user }}</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'logout' %}">Sair</a></li>
+    </ul>
+</div>

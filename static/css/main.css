@@ -1,0 +1,30 @@
+.orcamento-table {
+	font-size: 12px;
+}
+.orcamento-table tbody {
+	font-size: 10px;
+}
+
+.orcamento-row-even td {
+	background-color: #f0f0f0;
+}
+.orcamento-table-header th  {
+	background-color: #a9a9a9;
+}
+
+.legend {
+	font-size: 12px;
+	margin-left: 20px;
+	font-style: italic;
+}
+
+input.erro,
+select.erro,
+textarea.erro {
+	border: red 1px solid;
+}
+
+
+span.remanejavel {
+	color:#FF0000!important;
+}
