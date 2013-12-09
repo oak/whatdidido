@@ -9,7 +9,7 @@ from web.things.forms import ThingForm
 
 @login_required
 def list(request):
-    paginator = Paginator(request.user.things.all(), DEFAULT_PAGE_SIZE)
+    paginator = Paginator(Thing.objects.all(), DEFAULT_PAGE_SIZE)
 
     page = request.GET.get('things_page') if request.GET.get('things_page') is not None else 1
     try:
@@ -56,3 +56,10 @@ def edit(request, id):
         else:
             return render_to_response('things/edit.html', {'form': form},
                                       context_instance=RequestContext(request))
+
+@login_required
+def remove(request, id):
+    if request.method == 'GET':
+        item = get_object_or_404(Thing, id=id)
+        item.delete()
+        return redirect('thing-list')

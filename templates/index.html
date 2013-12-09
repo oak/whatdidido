@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h4>{% trans 'What did you do?!' %}</h4>
-        <form action="{% url 'action-create' %}" method="post">
-            {% csrf_token %}
-            <div class="control-group{% if form.thing.errors|length > 0 %} error{% endif %}">
-                <div class="controls">
-                    {{form.thing}}
-                    <input type="submit" value="{% trans 'Salvar' %}" class="btn primary"/>
-                </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+            <h4>{% trans 'Tell me what you did' %}</h4>
+                {% include 'actions/_form.html' %}
+                {% include 'actions/_list.html' with actions=latest_actions %}
             </div>
-        </form>
-        <ul>
-            {% for action in latest_actions %}
-            <li>{{action}}</li>
-            {% endfor %}
-        </ul>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-5">
+                <h4>{% trans 'Should you be doing...' %}</h4>
+                {% include 'actions/_list_scheduled.html' with actions=scheduled_actions %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

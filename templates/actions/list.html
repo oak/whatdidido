@@ -1,32 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h4>{% trans 'Actions' %}</h4>
-    <a href="{% url 'action-create' %}" class="btn btn-mini"> <i class="icon-plus-sign"></i> {% trans 'New action' %}</a>
-    {% if list.object_list|length > 0 %}
-        {% include 'common/_pager.html' with page_object=list querystring_name='actions_page' %}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th></th>
-                <th>{% trans 'Name' %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in list.object_list %}
-                <tr>
-                    <td style="width: 80px;">
-                        <a class="btn btn-mini" href="{% url 'action-edit' item.id %}">
-                            <i class="icon-edit"></i></a>&nbsp;
-                        <a class="btn btn-mini btn-danger" href="#">
-                            <i class="icon-remove"></i></a>
-                    </td>
-                    <td>{{ item }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <h6>{% trans 'No action found' %}.</h6>
-    {% endif %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h4>{% trans 'Actions' %}</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                {% include 'actions/_list.html' with actions=list.object_list %}
+                {% include 'common/_pager.html' with page_object=list querystring_name='actions_page' %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

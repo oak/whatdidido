@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
@@ -171,7 +171,6 @@ AUTH_PROFILE_MODULE = 'web.Profile'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = ''
 
-DEFAULT_PAGE_SIZE = 4
+DEFAULT_PAGE_SIZE = 5
 
-# FAST-CGI
 FORCE_SCRIPT_NAME = ''

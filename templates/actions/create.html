@@ -1,30 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h4>{% trans 'New action' %}</h4>
-    <fieldset>
-        <form action="{% url 'action-create' %}" method="post" class="form-horizontal">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="control-group{% if field.errors|length > 0 %} error{% endif %}">
-                    <label for="{{ field.if_for_label }}" class="control-label">{% trans field.label %}</label>
-
-                    <div class="controls">
-                        {{ field }}
-                        {% for error in field.errors %}
-                            <span class="help-inline">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-
-            <div class="control-group">
-                <div class="controls">
-                    <input type="submit" value="{% trans 'Salvar' %}" class="btn primary"/>
-                </div>
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h4>{% trans 'What did you do?!' %}</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                {% include 'actions/_form.html' %}
+                {% include 'actions/_list.html' with actions=latest_actions %}
             </div>
-
-
-        </form>
-    </fieldset>
+        </div>
+    </div>
 {% endblock %}

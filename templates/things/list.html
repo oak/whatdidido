@@ -1,32 +1,41 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h4>{% trans 'Things' %}</h4>
-    <a href="{% url 'thing-create' %}" class="btn btn-mini"> <i class="icon-plus-sign"></i> {% trans 'New thing' %}</a>
-    {% if list.object_list|length > 0 %}
-        {% include 'common/_pager.html' with page_object=list querystring_name='things_page' %}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th></th>
-                <th>{% trans 'Name' %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in list.object_list %}
-                <tr>
-                    <td style="width: 80px;">
-                        <a class="btn btn-mini" href="{% url 'thing-edit' item.id %}">
-                            <i class="icon-edit"></i></a>&nbsp;
-                        <a class="btn btn-mini btn-danger" href="#">
-                            <i class="icon-remove"></i></a>
-                    </td>
-                    <td>{{ item }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <h6>{% trans 'No thing found' %}.</h6>
-    {% endif %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h4>{% trans 'Things' %}</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <a href="{% url 'thing-create' %}" class="btn btn-xs"> {% trans 'New thing' %}</a>
+                {% if list.object_list|length > 0 %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>{% trans 'Name' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list.object_list %}
+                            <tr>
+                                <td style="width: 120px;">
+                                    <a class="btn btn-primary btn-xs" href="{% url 'thing-edit' item.id %}">
+                                        {% trans 'Edit' %}</a>&nbsp;
+                                    <a class="btn btn-xs btn-danger" href="{% url 'thing-remove' item.id %}"
+                                       onclick="javascript:return confirm('{% trans 'Are you sure?' %}');">{% trans 'Remove' %}</a>
+                                </td>
+                                <td>{{ item }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'common/_pager.html' with page_object=list querystring_name='things_page' %}
+                {% else %}
+                    <div class="well">{% trans 'No thing found' %}.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
