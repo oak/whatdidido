@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h4>{% trans 'Edit action' %}</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <fieldset>
+                    <form action="" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="input-group{% if field.errors|length > 0 %} error{% endif %}">
+                                <label for="{{ field.if_for_label }}"
+                                       class="control-label">{% trans field.label %}</label>
+
+                                <div class="controls">
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-inline">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <input type="submit" value="{% trans 'Save' %}" class="btn btn-primary"/>
+                        <a href="{% url 'home' %}" class="btn btn-default">{% trans 'Back' %}</a>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+{% endblock %}

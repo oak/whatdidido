@@ -1,0 +1,15 @@
+{% load i18n %}
+    {% if actions|length > 0 %}
+        <ul class="list-group">
+            {% for action in actions %}
+                <li class="list-group-item"><a href="{% url 'action-list-by-thing' action.thing.id %}" >{{ action.thing }}</a> @ {{ action.date|date:"SHORT_DATETIME_FORMAT" }}
+                        <div class="pull-right"><a class="btn btn-primary btn-xs" href="{% url 'action-edit' action.id %}">
+                            <span class="glyphicon glyphicon-edit"></span></a>&nbsp;<a href="{% url 'action-remove' action.id %}"
+                                                           class="btn btn-xs btn-danger"
+                                                           onclick="javascript:return confirm('{% trans 'Are you sure?' %}');"><span class="glyphicon glyphicon-remove"></span></a></div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="well">... did nothing</div>
+    {% endif %}

@@ -1,0 +1,13 @@
+{% load i18n %}
+                <form action="{% url 'action-create' %}" method="post" class="form-inline" roles="form">
+                    {% csrf_token %}
+                    {% for error in form.thing.errors %}
+                        <span class="help-inline">{{ error }}</span>
+                    {% endfor %}
+                    <div class="input-group{% if form.thing.errors|length > 0 %} error{% endif %}">
+                        {{ form.thing }}
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default">{% trans 'Salvar' %}</button>
+          </span>
+                    </div>
+                </form>
